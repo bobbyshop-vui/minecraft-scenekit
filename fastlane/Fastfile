@@ -1,0 +1,37 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Custom lane to build the app"
+  lane :custom_lane do
+    gym( # Build your app
+      scheme: "gameminecraftscenekit",       # Scheme của bạn
+      configuration: "Debug",            # Cấu hình bạn muốn
+      export_method: "ad-hoc",           # Phương thức phân phối (ad-hoc)
+      output_directory: "./build",       # Thư mục xuất ra
+      output_name: "YourApp.ipa",        # Tên file IPA
+      export_options: {
+        teamID: "A837B4FC3FC25459EC66A190670A2E6AB4391728", # Đặt team ID tại đây
+        provisioningProfiles: {
+          "com.your.bundle.identifier" => "Your Provisioning Profile Name" # Nếu cần
+        },
+      },
+      skip_codesigning: true             # Bỏ qua ký
+    ) # Đảm bảo rằng dấu ngoặc đơn này đã được đóng
+  end
+end
+
